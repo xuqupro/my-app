@@ -1,37 +1,30 @@
-#!/usr/bin/env groovy
+def call(Map pipelineParams) {
 
-def call(Map args) {
-  node {
-    stage('Build') {
-       echo "Command: ${args.command}"
-    }
-  }
-  return this
-}
+    pipeline {
+        agent any
+        stages {
 
-def build(Map args) {
-  node {
-    stage('Build') {
-      echo "Command: ${args.command}"
-    }
-  }
-  return this
-}
+            stage('build') {
+                steps {
+                    sh 'mvn clean package -DskipTests=true'
+                }
+            }
 
-def unitTest(Map args) {
-  node {
-    stage('Unit Test') {
-      echo "Command: ${args.command}"
+            stage ('test') {
+                steps {
+                    parallel (
+                        "unit tests": { sh 'mvn test' },
+                        "integration tests": { sh 'mvn integration-test' }
+                    )
+                }
+            }
+        }
+        post {
+            failure {
+                 mail to: pipelineParams.email,
+                 subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+                 body: "${env.BUILD_URL} has result ${currentBuild.result}"
+            }
+        }
     }
-  }
-  return this
-}
-
-def deploy(Map args) {
-  node {
-    stage('Deploy') {
-      echo "Command: ${args.command}"
-    }
-  }
-  return this
 }
