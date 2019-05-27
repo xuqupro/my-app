@@ -6,5 +6,5 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
-    sayHello.hello("Guy!")
+    echo 'say Hello!'
 }
