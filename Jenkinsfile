@@ -33,6 +33,7 @@ pipeline {
             steps {
                 // deploy(developmentServer, serverPort)
                 script {
+                    echo 'template'
                     template([])
                 }
             }
@@ -42,12 +43,14 @@ pipeline {
         success {
              echo 'Success'
              mail to: 'thegioiitjob@gmail.com',
-            subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
-            body: "${env.BUILD_URL} has result ${currentBuild.result}"
+             subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+             body: "${env.BUILD_URL} has result ${currentBuild.result}"
         }
         failure {
              echo 'Fail'
-             mail to: params.email, subject: 'Pipeline failed', body: "${env.BUILD_URL}"
+             mail to: 'thegioiitjob@gmail.com',
+             subject: "Status of pipeline: ${currentBuild.fullDisplayName}",
+             body: "${env.BUILD_URL} has result ${currentBuild.result}"
             
         }
     }
