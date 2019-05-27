@@ -35,7 +35,7 @@ pipeline {
                 // deploy(developmentServer, serverPort)
                 script {
                     echo 'template'
-                    template([]])
+                    template([])
                 }
             }
         }
