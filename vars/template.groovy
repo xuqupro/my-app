@@ -5,16 +5,17 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
-    node('master') {
-        stage('Checkout') {
-            checkout scm
-        }
-        stage('Build with unit testing') {
-            steps {
-               script {
-                  sh "mvn -Dintegration-tests.skip=true clean package"
-               }
-            }
+    // node('master') {
+    //     stage('Checkout') {
+    //         checkout scm
+    //     }
+    // }
+    pipeline {
+        agent any
+        stages {
+           stage('Checkout') {
+                checkout scm
+            } 
         }
     }
 }
