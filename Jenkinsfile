@@ -15,26 +15,26 @@ pipeline {
     }
 
     stages {
-        stage('checkout git') {
-             steps {
-                checkout scm
-            }
-        }
+        // stage('checkout git') {
+        //      steps {
+        //         checkout scm
+        //     }
+        // }
 
-         stage('Build with unit testing') {
-             steps {
-                script {
-                    sh "mvn -Dintegration-tests.skip=true clean package"
-                }
-             }
-         }
+        //  stage('Build with unit testing') {
+        //      steps {
+        //         script {
+        //             sh "mvn -Dintegration-tests.skip=true clean package"
+        //         }
+        //      }
+        //  }
 
         stage('deploy development'){
             steps {
                 // deploy(developmentServer, serverPort)
                 script {
                     echo 'template'
-                    template([])
+                    sayHello('Guy!')
                 }
             }
         }
