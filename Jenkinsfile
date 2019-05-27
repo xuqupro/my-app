@@ -35,7 +35,6 @@ pipeline {
                 // deploy(developmentServer, serverPort)
                 script {
                     echo 'template'
-                    sayHello('Guy!')
                     greetings {}
                 }
             }

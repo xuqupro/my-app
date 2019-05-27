@@ -1,5 +1,5 @@
 #!/usr/bin/env groovy
-import groovy.json.JsonSlurper
+@Library('library_demo') _
 def call(body) {
     // evaluate the body block, and collect configuration into the object
     def pipelineParams= [:]
