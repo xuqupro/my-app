@@ -29,11 +29,14 @@ pipeline {
              }
          }
 
-        // stage('deploy development'){
-        //     steps {
-        //         deploy(developmentServer, serverPort)
-        //     }
-        // }
+        stage('deploy development'){
+            steps {
+                // deploy(developmentServer, serverPort)
+                script {
+                    template([])
+                }
+            }
+        }
     }
     post {
         success {
