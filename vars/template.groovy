@@ -9,17 +9,5 @@ def call(body) {
         stage('Checkout') {
             checkout scm
         }
-        
-        stage('Run tests') {
-            try {
-                withMaven(maven: 'myMaven') {
-                    dir('bobcat') {
-                        sh 'mvn -Dintegration-tests.skip=true clean package'
-                    }
-                }
-            } finally {
-                echo "Fuck"
-            }
-        }
     }
 }
