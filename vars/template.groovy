@@ -6,6 +6,6 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
-
+    def sayHello = load 'vars/sayHello.groovy'
     sayHello.hello("Guy!")
 }
