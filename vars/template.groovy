@@ -5,5 +5,21 @@ def call(body) {
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = pipelineParams
     body()
-    echo 'say Hello!'
+    node('master') {
+        stage('Checkout') {
+            checkout scm
+        }
+        
+        stage('Run tests') {
+            try {
+                withMaven(maven: 'myMaven') {
+                    dir('bobcat') {
+                        sh 'mvn -Dintegration-tests.skip=true clean package'
+                    }
+                }
+            } finally {
+                echo "Fuck"
+            }
+        }
+    }
 }
