@@ -9,5 +9,12 @@ def call(body) {
         stage('Checkout') {
             checkout scm
         }
+        stage('Build with unit testing') {
+            steps {
+               script {
+                  sh "mvn -Dintegration-tests.skip=true clean package"
+               }
+            }
+        }
     }
 }
