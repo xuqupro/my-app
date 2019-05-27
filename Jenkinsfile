@@ -36,7 +36,7 @@ pipeline {
                 script {
                     echo 'template'
                     sayHello('Guy!')
-                    template(email: 'thegioiitjob@gmail.com')
+                    greetings {}
                 }
             }
         }
